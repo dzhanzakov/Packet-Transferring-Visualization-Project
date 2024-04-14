@@ -139,7 +139,6 @@ function animateMessage(shortestPath) {
 
             const delay = weight * 500; 
             setTimeout(() => {
-                edge.classList.remove('shortest-path');
                 
                 animateEdge(index + 1);
             }, delay);
