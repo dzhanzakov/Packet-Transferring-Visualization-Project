@@ -96,7 +96,7 @@ function addEdge() {
 
     if (
         sourceID == '' || targetID == '' ||
-        data.edges.find(e => e.source === sourceID && e.target === targetID)
+        data.edges.find(e => e.source === sourceID && e.target === targetID) || data.edges.find(e => e.source == targetID && e.target == sourceID)
     ) return;
 
     const edge = document.createElement('div');
@@ -110,7 +110,7 @@ function addEdge() {
     const areaRect = area.getBoundingClientRect();
 
     // Calculate edge width and height
-                let distance = Math.sqrt((sourceRect.left - targetRect.left) ** 2 + (sourceRect.top - targetRect.top) ** 2);
+    let distance = Math.sqrt((sourceRect.left - targetRect.left) ** 2 + (sourceRect.top - targetRect.top) ** 2);
     let angle = Math.atan2(targetRect.top - sourceRect.top, targetRect.left - sourceRect.left);
 
     // Calculate edge position
@@ -130,3 +130,43 @@ function addEdge() {
         targetBody: targetBody
     });
 }
+
+function clearGraph() {
+    area.innerHTML = '';
+    sourceDropdown.innerHTML = '';
+    targetDropdown.innerHTML = '';
+    data = { vertices: [], edges: [] };
+}
+
+function removeEdge() {
+    const sourceID = document.getElementById('sourceVertex').value;
+    const targetID = document.getElementById('targetVertex').value;
+
+    const index = data.edges.findIndex(e => e.source === sourceID && e.target === targetID);
+    if (index !== -1) {
+        const edge = data.edges[index];
+        edge.body.remove();
+        data.edges.splice(index, 1);
+    }
+}
+
+function submitData() {
+    fetch('/save-graph', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Graph data submitted successfully.');
+        } else {
+            console.error('Failed to submit graph data.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
