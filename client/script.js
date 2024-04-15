@@ -43,6 +43,13 @@ async function receiveShortestPath(requestData) {
 function visualizeShortestPath(shortestPath) {
     let index = 0;
 
+    function clearRedEdges() {
+        const edges = document.querySelectorAll('.edge');
+        edges.forEach(edgeElement => {
+            edgeElement.style.backgroundColor = ''; // Reset background color
+        });
+    }
+
     function highlightEdge() {
         if (index < shortestPath.length - 1) {
             const source = shortestPath[index];
@@ -58,7 +65,7 @@ function visualizeShortestPath(shortestPath) {
             setTimeout(highlightEdge, 1000); 
         }
     }
-
+    clearRedEdges();
     highlightEdge();
 }
 
