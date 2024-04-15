@@ -1,6 +1,7 @@
 const express = require('express');
 const { saveGraphData, getGraphData } = require('../database/graphData');
 const cors = require('cors');
+const dijkstra = require('./utils')
 
 const app = express();
 const port = 3000;
@@ -25,6 +26,17 @@ app.get('/get-graph', async (req, res) => {
         res.json(graphData); 
     } catch (error) {
         console.error('Error retrieving graph data:', error);
+        res.sendStatus(500);
+    }
+});
+
+app.post('/shortest-path', async (req, res) => {
+    try {
+        const { graph, source, target } = req.body;
+        const shortestPath = dijkstra(graph, source, target);
+        res.json(shortestPath);
+    } catch (error) {
+        console.error('Error calculating shortest path:', error);
         res.sendStatus(500);
     }
 });
