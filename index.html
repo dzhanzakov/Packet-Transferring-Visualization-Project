@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/styles/styles.css">
+    <title>Admin Page</title>
+</head>
+<body>
+    <div style="margin: 10px;">
+        <input type="number" id="v-count" min="2" placeholder="Number of vertices">
+        <button onclick="addVertices()">Add Vertices</button>
+        <select id="sourceVertex"></select>
+        <select id="targetVertex"></select>
+        <button onclick="addEdge()">Add Edge</button>
+        <button onclick="clearGraph()">Clear Graph</button>
+        <button onclick="removeEdge()">Remove Edge</button>
+        <button onclick="submitData()">Submit Data</button>
+    </div>
+    <main></main>
+</body>
+
+<script src="./static/js/script.js"></script>
+</html>
