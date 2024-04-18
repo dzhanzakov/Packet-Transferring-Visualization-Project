@@ -1,7 +1,7 @@
 <template>
     <div style="height: 100vh; display: flex; flex-direction: row; align-items: center; justify-content: space-around;">
-      <div style="display: flex; height: 50%; flex-direction: column; width: 20%; align-items: center; justify-content: center;">
-        <div style="width: 45%; height: 45%;">
+      <div style="display: flex; height: 90%; flex-direction: column; width: 20%; justify-content: space-around; align-items: center;">
+        <div style="width: 75%; height: 35%;">
           <Card>
             <template #default>
                 <form id="sender-form" @submit.prevent="submitAction" style="display: flex; flex-direction: column;">
@@ -14,7 +14,7 @@
             </template>
           </Card>
         </div>
-        <div style="width: 45%; height: 45%;">
+        <div style="width: 75%; height: 35%;">
           <Card title="Paths">
           </Card>
         </div>
